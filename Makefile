@@ -2,13 +2,16 @@
 # Uso:
 #   make        -> compila el programa (genera ./algoritmos)
 #   make run    -> compila y ejecuta
-#   make clean  -> borra el ejecutable
+#   make test   -> compila y ejecuta las pruebas (./pruebas)
+#   make clean  -> borra los ejecutables
 
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 TARGET = algoritmos
 SRC = main.cpp
-HEADERS = ordenamientos.h busquedas.h estructuras.h
+TEST = pruebas
+TEST_SRC = pruebas.cpp
+HEADERS = ordenamientos.h busquedas.h estructuras.h grafos.h dinamica.h
 
 all: $(TARGET)
 
@@ -18,7 +21,13 @@ $(TARGET): $(SRC) $(HEADERS)
 run: $(TARGET)
 	./$(TARGET)
 
-clean:
-	rm -f $(TARGET)
+$(TEST): $(TEST_SRC) $(HEADERS)
+	$(CXX) $(CXXFLAGS) -o $(TEST) $(TEST_SRC)
 
-.PHONY: all run clean
+test: $(TEST)
+	./$(TEST)
+
+clean:
+	rm -f $(TARGET) $(TEST)
+
+.PHONY: all run test clean

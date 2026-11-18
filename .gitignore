@@ -1,2 +1,6 @@
 # Ejecutable compilado
 algoritmos
+
+# Pruebas compiladas y carpeta de CMake
+pruebas
+build/
